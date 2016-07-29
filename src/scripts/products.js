@@ -22,6 +22,8 @@ $(function() {
 
   //populate products
   fullProductList(productObj);
+
+  //show cart on click
   $('#button').on('click',function() {
     $('#shoppin').show();
   });
@@ -70,7 +72,7 @@ $(function() {
   $(document).scroll(function() {
     checkOffset();
   });
-
+  //close shopping cart
   $('#shoppin').mouseleave(function() {
     $('#shoppin').css('display','none');
   });

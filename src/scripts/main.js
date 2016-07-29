@@ -27,6 +27,7 @@ $(function() {
   function slides() {
     return $carousel.find($slide);
   }
+
   slides().fadeOut();
   //Set active classes
   slides().first().addClass('active');
@@ -43,6 +44,7 @@ $(function() {
         }, $transition_time +  $time_between_slides);
 
   //<----Image Carousel Finish---->//
+
   //<----Click High-Jack---->//
   $('form').on('submit', function(event) {
     event.preventDefault();
@@ -90,20 +92,18 @@ $(function() {
 });
 //Generte 3 random products for homepage//
 function createProductElement(productObjArr) {
-  productObjArr.forEach(function(value) {
-    $('#product-display').append('<figure class="col-md-4 products float-left bg-info"><img src="assets/' + value.id + '.png" alt="foobar"><div><strong>Rating:' + randomStar() + '</strong></div><p class=""> <strong>Description:</strong> ' + value.description + '</p><p class="text-info child"> <strong>Price:</strong> ' + value.price + '</p><div class="purchase bg-prime text-center" style=" display: none"><h3>Purchase</h3></div></figure>');
-  });
+  productObjArr.forEach(createProduct('products', $('#product-display')));
   var $divs = $('#product-display > figure');
   for (var i = 0; i < $divs.length; i += 4) {
     $divs.slice(i, i + 4).wrapAll('<div class="row"></div>');
   }
 }
+//creater three random products for shopping cart
 function createShoppingList(productObjArr, totalPrice) {
   $('#shoppingList').append('<h3><strong>Total Price: $' + totalPrice.toFixed(2) + '</strong></h3>');
-  productObjArr.forEach(function(value) {
-    $('#shoppingList').append('<li class="bg-info products-cart"><img src="assets/' + value.id + '.png" alt="foobar"><div><strong>Rating:' + randomStar() + '</strong></div><p class=""> <strong>Description:</strong> ' + value.description + '</p><p class="text-info child"> <strong>Price:</strong> ' + value.price + '</p><div class="purchase bg-prime text-center" style=" display: none"><h3>Purchase</h3></div></li>');
-  });
+  productObjArr.forEach(createProduct('products-cart', $('#shoppin')));
 }
+
 function randomStar() {
   var starNumber = Math.floor((Math.random() * 10) + 1) / 2;
   var fullStarBar = [];
@@ -122,12 +122,15 @@ function randomStar() {
   }
   return fullStarBar.toString().replace(/,/g, '');
 }
+
 //email validater
 function emailVal(emailToCheck) {
   emailNoWS = emailToCheck.trim();
-  var bool = true;
-  if (emailNoWS[0] === '@' ||  emailNoWS.indexOf('@') + 1 === emailNoWS.indexOf('.') || emailNoWS.indexOf('@') === -1) {
-    bool = false;
-  }
-  return bool;
+  return !(emailNoWS[0] === '@' ||  emailNoWS.indexOf('@') + 1 === emailNoWS.indexOf('.') || emailNoWS.indexOf('@') === -1)
+}
+
+
+
+function createProduct(className, domTarget){
+    domTarget.append('<figure class="col-md-4' + className + 'float-left bg-info"><img src="assets/' + value.id + '.png" alt="foobar"><div><strong>Rating:' + randomStar() + '</strong></div><p class=""> <strong>Description:</strong> ' + value.description + '</p><p class="text-info child"> <strong>Price:</strong> ' + value.price + '</p><div class="purchase bg-prime text-center" style=" display: none"><h3>Purchase</h3></div></figure>');
 }
