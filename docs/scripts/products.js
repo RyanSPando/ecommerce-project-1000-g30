@@ -2,7 +2,7 @@ $(function() {
   'use strict';
   console.log('sanity check');
 
-  var urlProduct = 'http://galvanize-student-apis.herokuapp.com/gcommerce/products';
+  var urlProduct = 'https://galvanize-student-apis.herokuapp.com/gcommerce/products';
 
   //create promise object for ajax call
   var productObj = ajaxCall(urlProduct);
